@@ -11,18 +11,18 @@ python-translate is a simple command line dictionary, it powered by Bing, Youdao
 
 # Usage
 ```
-usage: translate.py [-h] [-i] [-n] [-p] [-s SERVICE] [-V] word
+usage: translate.py [-h] [-n] [-p] [-s SERVICE] [-w] [-V] word
 
 positional arguments:
   word                  word or 'some phrase'
 
 optional arguments:
   -h, --help            show this help message and exit
-  -i, --ignorelocal     ignore local data
   -n, --nostorage       turn off data storage
   -p, --pronounce       eSpeak text-to-speech
   -s SERVICE, --service SERVICE
                         choose translate service: 'bing', 'youdao' or 'iciba'
+  -w, --webonly         ignore local data
   -V, --version         show program's version number and exit
 ```
 
