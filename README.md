@@ -38,7 +38,7 @@ optional arguments:
 
 # External Resources
 * [SCOWL (Spell Checker Oriented Word Lists)](http://wordlist.aspell.net/)
-* [List of spell checkers](www.dmoz.org/Arts/Writers_Resources/Software/Spelling_and_Grammar/Spell_Checkers)
+* [List of spell checkers](http://www.dmoz.org/Arts/Writers_Resources/Software/Spelling_and_Grammar/Spell_Checkers)
 * [Wiktionary:Frequency lists](https://en.wiktionary.org/wiki/Wiktionary:Frequency_lists)
 * [wordlist.10000](http://www.mit.edu/~ecprice/wordlist.10000)
 * [top10000en.txt](http://wortschatz.uni-leipzig.de/Papers/top10000en.txt)
