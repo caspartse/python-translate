@@ -1,0 +1,4 @@
+lxml==3.4.0
+requests==2.11.1
+beautifulsoup4==4.5.1
+pyenchant==1.6.8

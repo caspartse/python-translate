@@ -179,7 +179,7 @@ class Client(object):
     def pronounce(self):
         import commands
         try:
-            cmd = 'espeak  -v en-us -s 128 "%s" > /dev/null 2>&1 & exit 0' % (
+            cmd = 'espeak -v en-us -s 128 "%s" > /dev/null 2>&1 & exit 0' % (
                 self.word)
             status, output = commands.getstatusoutput(cmd)
         except:
