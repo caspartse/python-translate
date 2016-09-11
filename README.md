@@ -2,7 +2,7 @@
 python-translate is a simple command line dictionary, it powered by Bing, Youdao and Iciba translation services.
 
 ### Screenshot
-![](https://raw.githubusercontent.com/caspartse/python-translate/master/screenshot.jpg)
+![](https://raw.githubusercontent.com/caspartse/python-translate/master/screenshot_v0.1.1.jpg)
 
 ### Features
 * English-Chinese / Chinese-English
@@ -12,7 +12,9 @@ python-translate is a simple command line dictionary, it powered by Bing, Youdao
 
 ### Usage
 ```
-usage: translate.py [-h] [-n] [-p] [-s SERVICE] [-w] [-V] word
+usage: translate.py [-h] [-n] [-p {espeak,festival}] [-s {bing,youdao,iciba}]
+                    [-w] [-V]
+                    word
 
 positional arguments:
   word                  word or 'some phrase'
@@ -20,9 +22,10 @@ positional arguments:
 optional arguments:
   -h, --help            show this help message and exit
   -n, --nostorage       turn off data storage
-  -p, --pronounce       eSpeak text-to-speech
-  -s SERVICE, --service SERVICE
-                        choose translate service: 'bing', 'youdao' or 'iciba'
+  -p {espeak,festival}, --pronounce {espeak,festival}
+                        text-to-speech software: 'espeak' or 'festival'
+  -s {bing,youdao,iciba}, --service {bing,youdao,iciba}
+                        translate service: 'bing', 'youdao' or 'iciba'
   -w, --webonly         ignore local data
   -V, --version         show program's version number and exit
 ```
@@ -45,12 +48,14 @@ $ python2 translate.py hello -syoudao
 
 #### 关于单词发音
 
-单词发音功能默认关闭，如需启用，可使用 `-p` 或 `--pronounce` 选项。
-可修改源码中的 `pronounce` 部分以更改 eSpeak 的[发音配置](http://espeak.sourceforge.net/docindex.html)。
+单词发音功能默认关闭，如需启用，可使用 `-p` 或 `--pronounce` 选项，选择具体的软件发音： espeak | festival 。
+
+可修改源码中的 `pronounce` 部分以更改 eSpeak 或 Festival 的发音配置。
 
 另外 TTS 合成语音效果一般，若有真人语音文件，可配合 aplay、mpg321、sox 等命令使用。
 ```
-$ python2 translate.py hello -p
+$ python2 translate.py hello -p=espeak
+$ python2 translate.py hello -p=festival
 ```
 
 ### Requirements
@@ -58,10 +63,26 @@ $ python2 translate.py hello -p
 * [Beautiful Soup 4](https://www.crummy.com/software/BeautifulSoup/)
 * [lxml](http://lxml.de/)
 * [pyenchant](https://pythonhosted.org/pyenchant/)
+
+```
+$ pip install requests beautifulsoup4 lxml pyenchant
+# OR
+$ pip install -r requirements.txt
+```
+
 * [eSpeak](http://espeak.sourceforge.net/) (for pronunciation, optional)
+* [Festival](http://www.cstr.ed.ac.uk/projects/festival/) (for pronunciation, optional)
+
+```
+$ sudo apt-get install espeak festival
+```
 
 ### Tips
-`$ alias t="python2 /path/to/the/translate.py"`
+```
+$ alias t="python2 /path/to/the/translate.py"
+$ alias te="t -p=espeak"
+$ alias tf="t -p=festival"
+```
 
 ### External Resources
 * [SCOWL (Spell Checker Oriented Word Lists)](http://wordlist.aspell.net/)
@@ -70,3 +91,18 @@ $ python2 translate.py hello -p
 * [wordlist.10000](http://www.mit.edu/~ecprice/wordlist.10000)
 * [top10000en.txt](http://wortschatz.uni-leipzig.de/Papers/top10000en.txt)
 * [google-10000-english](https://github.com/first20hours/google-10000-english)
+
+### Changelog
+
+v 0.1.1
+---
+Sep 11, 2016
+
+* Optimized options & arguments
+* Added support for festival TTS server
+
+v0.1.0
+---
+Sep 9, 2016
+
+* Initial release

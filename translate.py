@@ -115,7 +115,6 @@ class Iciba(object):
             text = re.search(pattern, text).group(1)
         except:
             return None
-        text = re.search(pattern, text).group(1)
         if (resp.status_code == 200) and (text):
             soup = BeautifulSoup(text, 'lxml')
             ps = soup.find_all('p')
@@ -158,8 +157,6 @@ class Client(object):
                 S = Youdao()
             elif self.service == 'iciba':
                 S = Iciba()
-            else:
-                S = Bing()
             trans = S.query(self.word)
             self.trans = trans
             return trans
@@ -176,11 +173,13 @@ class Client(object):
         suggestion = d.suggest(self.word)
         return suggestion
 
-    def pronounce(self):
+    def pronounce(self, tts):
+        if tts == 'festival':
+            cmd = ' echo "%s" | festival --tts > /dev/null 2>&1' % (self.word)
+        elif tts == 'espeak':
+            cmd = 'espeak -v en-us "%s" > /dev/null 2>&1' % (self.word)
         import commands
         try:
-            cmd = 'espeak -v en-us -s 128 "%s" > /dev/null 2>&1 & exit 0' % (
-                self.word)
             status, output = commands.getstatusoutput(cmd)
         except:
             pass
@@ -198,14 +197,14 @@ def parseArgs():
     parser.add_argument('word', help="word or 'some phrase'")
     parser.add_argument('-n', '--nostorage', dest='nostorage',
                         action='store_true', help='turn off data storage')
-    parser.add_argument('-p', '--pronounce', dest='pronounce',
-                        action='store_true', help='eSpeak text-to-speech')
-    parser.add_argument('-s', '--service', dest='service', default='bing',
-                        help="choose translate service: 'bing', 'youdao' or 'iciba'")
+    parser.add_argument('-p', '--pronounce', dest='pronounce', choices=[
+                        'espeak', 'festival'], help="text-to-speech software: 'espeak' or 'festival'")
+    parser.add_argument('-s', '--service', dest='service', choices=[
+                        'bing', 'youdao', 'iciba'], default='bing', help="translate service: 'bing', 'youdao' or 'iciba'")
     parser.add_argument('-w', '--webonly', dest='webonly',
                         action='store_true', help='ignore local data')
     parser.add_argument('-V', '--version', action='version',
-                        version='%(prog)s 0.1.0')
+                        version='%(prog)s 0.1.1')
     return parser.parse_args()
 
 
@@ -222,7 +221,7 @@ if __name__ == '__main__':
     if trans:
         print trans
         if args.pronounce:
-            p1 = Process(target=C.pronounce)
+            p1 = Process(target=C.pronounce, args=(args.pronounce,))
             p1.daemon = True
             p1.start()
         if not args.nostorage:
