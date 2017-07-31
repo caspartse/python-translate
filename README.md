@@ -45,6 +45,7 @@ $ python2 translate.py hello -s=youdao
 $ python2 translate.py hello -s youdao
 $ python2 translate.py hello -syoudao
 ```
+若该选项非空，则 `webonly` 会自动开启，即不使用本地数据库。
 
 #### 关于单词发音
 
