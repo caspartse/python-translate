@@ -2,8 +2,8 @@
 python-translate is a simple command line dictionary, it powered by Bing, Youdao and Iciba translation services.
 
 ### Screenshot
-![](https://raw.githubusercontent.com/caspartse/python-translate/master/screenshot_v0.1.1.jpg)
-
+![](https://raw.githubusercontent.com/caspartse/python-translate/master/screenshot_v0.1.2.jpg)
+Nov
 ### Features
 * English-Chinese / Chinese-English
 * Spell checking and suggestion (English only)
@@ -94,7 +94,14 @@ $ alias tf="t -p=festival"
 
 ### Changelog
 
-v 0.1.1
+v0.1.2
+---
+Jul 31, 2017
+
+* "webonly" will be turn on when "service" is given
+* update spell-checker word lists
+
+v0.1.1
 ---
 Sep 11, 2016
 

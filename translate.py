@@ -132,12 +132,15 @@ class Iciba(object):
 
 path = os.path.dirname(os.path.realpath(__file__))
 db = dbm.open(path + '/data/vocabulary', 'c')
+DEFAULT_SERVICE = 'bing'
 
 
 class Client(object):
 
-    def __init__(self, word, service='bing', webonly=False):
+    def __init__(self, word, service=None, webonly=False):
         super(Client, self).__init__()
+        if not service:
+            service = DEFAULT_SERVICE
         self.service = service
         self.word = word
         self.trans = None
@@ -167,7 +170,7 @@ class Client(object):
         import enchant
         try:
             d = enchant.DictWithPWL(
-                'en_US', path + '/data/spell-checker/american-english')
+                'en_US', path + '/data/spell-checker/american-english-large')
         except:
             d = enchant.Dict('en_US')
         suggestion = d.suggest(self.word)
@@ -200,11 +203,11 @@ def parseArgs():
     parser.add_argument('-p', '--pronounce', dest='pronounce', choices=[
                         'espeak', 'festival'], help="text-to-speech software: 'espeak' or 'festival'")
     parser.add_argument('-s', '--service', dest='service', choices=[
-                        'bing', 'youdao', 'iciba'], default='bing', help="translate service: 'bing', 'youdao' or 'iciba'")
+                        'bing', 'youdao', 'iciba'], help="translate service: 'bing', 'youdao' or 'iciba'")
     parser.add_argument('-w', '--webonly', dest='webonly',
                         action='store_true', help='ignore local data')
     parser.add_argument('-V', '--version', action='version',
-                        version='%(prog)s 0.1.1')
+                        version='%(prog)s 0.1.2')
     return parser.parse_args()
 
 
@@ -213,6 +216,8 @@ if __name__ == '__main__':
     word = args.word.strip()
     service = args.service
     webonly = args.webonly
+    if service:
+        webonly = True
     C = Client(word, service=service, webonly=webonly)
     pool = ThreadPool()
     _trans = pool.apply_async(C.translate)
