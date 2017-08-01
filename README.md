@@ -83,6 +83,9 @@ $ sudo apt-get install espeak festival
 $ alias t="python2 /path/to/the/translate.py"
 $ alias te="t -p=espeak"
 $ alias tf="t -p=festival"
+$ alias tb="t -s=bing"
+$ alias ty="t -s=youdao"
+$ alias ti="t -s=iciba"
 ```
 
 ### External Resources
