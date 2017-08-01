@@ -99,7 +99,7 @@ v0.1.2
 ---
 Jul 31, 2017
 
-* "webonly" will be turn on when "service" is given
+* "webonly" will be enabled while "service" is given
 * update vocabulary.db and spell-checker word lists
 
 v0.1.1
