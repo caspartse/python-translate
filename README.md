@@ -101,7 +101,7 @@ $ alias tr='t -p=real'
 ### Changelog
 v0.1.3
 ---
-Aug 5, 2017
+Aug 4, 2017
 * Added support for RealPeopleTTS
 
 v0.1.2
