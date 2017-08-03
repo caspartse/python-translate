@@ -84,10 +84,10 @@ $ sudo apt-get install libxml2-dev libxslt-dev python-dev espeak festival alsa-b
 $ alias t="python2 /path/to/the/translate.py"
 $ alias te="t -p=espeak"
 $ alias tf="t -p=festival"
+$ alias tr="t -p=real"
 $ alias tb="t -s=bing"
 $ alias ty="t -s=youdao"
 $ alias ti="t -s=iciba"
-$ alias tr='t -p=real'
 ```
 
 ### External Resources
