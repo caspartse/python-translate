@@ -27,7 +27,7 @@ class Bing(object):
         sess.headers.update(headers)
         url = 'http://cn.bing.com/dict/SerpHoverTrans?q=%s' % (word)
         try:
-            resp = sess.get(url, timeout=30)
+            resp = sess.get(url, timeout=100)
         except:
             return None
         text = resp.text
@@ -68,7 +68,7 @@ class Youdao(object):
         sess.headers.update(headers)
         url = 'http://dict.youdao.com/fsearch?q=%s' % (word)
         try:
-            resp = sess.get(url, timeout=30)
+            resp = sess.get(url, timeout=100)
         except:
             return None
         text = resp.content
@@ -109,7 +109,7 @@ class Iciba(object):
         sess.headers.update(headers)
         url = 'http://open.iciba.com/huaci_new/dict.php?word=%s' % (word)
         try:
-            resp = sess.get(url, timeout=30)
+            resp = sess.get(url, timeout=100)
             text = resp.text
             pattern = r'(<div class=\\\"icIBahyI-group_pos\\\">[\s\S]+?</div>)'
             text = re.search(pattern, text).group(1)
