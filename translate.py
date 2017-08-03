@@ -181,6 +181,9 @@ class Client(object):
             cmd = ' echo "%s" | festival --tts > /dev/null 2>&1' % (self.word)
         elif tts == 'espeak':
             cmd = 'espeak -v en-us "%s" > /dev/null 2>&1' % (self.word)
+        elif tts == 'real':
+            cmd = 'find %s/data/RealPeopleTTS/ -type f -iname "%s.wav" | head -n1 | xargs -I {} aplay {} > /dev/null 2>&1' % (
+                path, self.word)
         import commands
         try:
             status, output = commands.getstatusoutput(cmd)
@@ -201,13 +204,13 @@ def parseArgs():
     parser.add_argument('-n', '--nostorage', dest='nostorage',
                         action='store_true', help='turn off data storage')
     parser.add_argument('-p', '--pronounce', dest='pronounce', choices=[
-                        'espeak', 'festival'], help="text-to-speech software: 'espeak' or 'festival'")
+                        'espeak', 'festival', 'real'], help="text-to-speech software: 'espeak', 'festival' or 'real'")
     parser.add_argument('-s', '--service', dest='service', choices=[
                         'bing', 'youdao', 'iciba'], help="translate service: 'bing', 'youdao' or 'iciba'")
     parser.add_argument('-w', '--webonly', dest='webonly',
                         action='store_true', help='ignore local data')
     parser.add_argument('-V', '--version', action='version',
-                        version='%(prog)s 0.1.2')
+                        version='%(prog)s 0.1.3')
     return parser.parse_args()
 
 

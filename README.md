@@ -51,12 +51,11 @@ $ python2 translate.py hello -syoudao
 
 单词发音功能默认关闭，如需启用，可使用 `-p` 或 `--pronounce` 选项，选择具体的软件发音： espeak | festival 。
 
-可修改源码中的 `pronounce` 部分以更改 eSpeak 或 Festival 的发音配置。
-
-另外 TTS 合成语音效果一般，若有真人语音文件，可配合 aplay、mpg321、sox 等命令使用。
+另外 TTS 合成语音效果一般，若有真人语音文件，可配合 aplay、mpg321、sox 等命令使用，可修改源码中的 `pronounce` 部分以更改的发音配置。
 ```
 $ python2 translate.py hello -p=espeak
 $ python2 translate.py hello -p=festival
+$ python2 translate.py hello -p=real
 ```
 
 ### Requirements
@@ -71,11 +70,13 @@ $ pip install requests beautifulsoup4 lxml pyenchant
 $ pip install -r requirements.txt
 ```
 
+* [lxml](http://lxml.de/index.html)
 * [eSpeak](http://espeak.sourceforge.net/) (for pronunciation, optional)
 * [Festival](http://www.cstr.ed.ac.uk/projects/festival/) (for pronunciation, optional)
+* [ALSA](https://www.alsa-project.org/) (for pronunciation, optional)
 
 ```
-$ sudo apt-get install espeak festival
+$ sudo apt-get install libxml2-dev libxslt-dev python-dev espeak festival alsa-base alsa-utils
 ```
 
 ### Tips
@@ -86,6 +87,7 @@ $ alias tf="t -p=festival"
 $ alias tb="t -s=bing"
 $ alias ty="t -s=youdao"
 $ alias ti="t -s=iciba"
+$ alias tr='t -p=real'
 ```
 
 ### External Resources
@@ -97,13 +99,17 @@ $ alias ti="t -s=iciba"
 * [google-10000-english](https://github.com/first20hours/google-10000-english)
 
 ### Changelog
+v0.1.3
+---
+Aug 5, 2017
+* Added support for RealPeopleTTS
 
 v0.1.2
 ---
 Jul 31, 2017
 
-* "webonly" will be enabled while "service" is given
-* update vocabulary.db and spell-checker word lists
+* Change option: "webonly" will be enabled while "service" is given
+* Update vocabulary.db and spell-checker word lists
 
 v0.1.1
 ---
