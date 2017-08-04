@@ -22,8 +22,8 @@ positional arguments:
 optional arguments:
   -h, --help            show this help message and exit
   -n, --nostorage       turn off data storage
-  -p {espeak,festival}, --pronounce {espeak,festival}
-                        text-to-speech software: 'espeak' or 'festival'
+  -p {espeak,festival,real}, --pronounce {espeak,festival,real}
+                        text-to-speech software: 'espeak', 'festival' or 'real'
   -s {bing,youdao,iciba}, --service {bing,youdao,iciba}
                         translate service: 'bing', 'youdao' or 'iciba'
   -w, --webonly         ignore local data
