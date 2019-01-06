@@ -2,7 +2,7 @@
 python-translate is a simple command line dictionary, it powered by Bing, Youdao and Iciba translation services.
 
 ### Screenshot
-![](https://raw.githubusercontent.com/caspartse/python-translate/master/screenshot_v0.1.3.jpg)
+![](https://raw.githubusercontent.com/caspartse/python-translate/master/screenshot_v0.1.4.jpg)
 
 ### Features
 * English-Chinese / Chinese-English
