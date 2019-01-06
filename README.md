@@ -82,9 +82,9 @@ $ sudo apt-get install libxml2-dev libxslt-dev python-dev espeak festival alsa-b
 ### Tips
 ```
 $ alias t="python2 /path/to/the/translate.py"
-$ alias te="t -p=espeak"
-$ alias tf="t -p=festival"
-$ alias tr="t -p=real"
+$ alias tpe="t -p=espeak"
+$ alias tpf="t -p=festival"
+$ alias tpr="t -p=real"
 $ alias tb="t -s=bing"
 $ alias ty="t -s=youdao"
 $ alias ti="t -s=iciba"
@@ -99,6 +99,11 @@ $ alias ti="t -s=iciba"
 * [google-10000-english](https://github.com/first20hours/google-10000-english)
 
 ### Changelog
+v0.1.4
+---
+Jan 6, 2019
+* Added Hyphenation (powered by dict.cn)
+
 v0.1.3
 ---
 Aug 4, 2017

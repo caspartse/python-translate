@@ -1,8 +1,9 @@
 #!/usr/bin/env python
-# -*- coding:utf-8 -*
+# -*- coding:utf-8 -*-
 import os
 import argparse
 import dbm
+import requests
 import re
 from multiprocessing.dummy import Pool as ThreadPool
 from multiprocessing import Process
@@ -14,7 +15,6 @@ class Bing(object):
         super(Bing, self).__init__()
 
     def query(self, word):
-        import requests
         from bs4 import BeautifulSoup
         sess = requests.Session()
         headers = {
@@ -52,7 +52,6 @@ class Youdao(object):
         super(Youdao, self).__init__()
 
     def query(self, word):
-        import requests
         try:
             import xml.etree.cElementTree as ET
         except ImportError:
@@ -96,7 +95,6 @@ class Iciba(object):
         super(Iciba, self).__init__()
 
     def query(self, word):
-        import requests
         from bs4 import BeautifulSoup
         sess = requests.Session()
         headers = {
@@ -176,6 +174,18 @@ class Client(object):
         suggestion = d.suggest(self.word)
         return suggestion
 
+    def hyphenate(self):
+        sess = requests.Session()
+        url = 'http://dict.cn/%s' % (self.word)
+        hyphenation = None
+        try:
+            resp = sess.get(url, allow_redirects=False, timeout=100)
+            pattern = ur'<h1 class="keyword" tip="音节划分：([^"]+)">'
+            hyphenation = re.search(pattern, resp.text).group(1).replace('&#183;', '-')
+        except:
+            pass
+        return hyphenation
+
     def pronounce(self, tts):
         if tts == 'festival':
             cmd = ' echo "%s" | festival --tts > /dev/null 2>&1' % (self.word)
@@ -210,7 +220,7 @@ def parseArgs():
     parser.add_argument('-w', '--webonly', dest='webonly',
                         action='store_true', help='ignore local data')
     parser.add_argument('-V', '--version', action='version',
-                        version='%(prog)s 0.1.3')
+                        version='%(prog)s 0.1.4')
     return parser.parse_args()
 
 
@@ -223,10 +233,14 @@ if __name__ == '__main__':
         webonly = True
     C = Client(word, service=service, webonly=webonly)
     pool = ThreadPool()
+    _hyphen = pool.apply_async(C.hyphenate)
     _trans = pool.apply_async(C.translate)
     _suggestion = pool.apply_async(C.suggest)
+    hyphen = _hyphen.get()
     trans = _trans.get()
     if trans:
+        if hyphen:
+            print hyphen
         print trans
         if args.pronounce:
             p1 = Process(target=C.pronounce, args=(args.pronounce,))
