@@ -9,6 +9,7 @@ python-translate is a simple command line dictionary, it powered by Bing, Youdao
 * Spell checking and suggestion (English only)
 * Data storage (with dbm module)
 * Pronunciation
+* Hyphenation
 
 ### Usage
 ```
